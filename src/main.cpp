@@ -264,22 +264,22 @@ int main()
 
             for (int i = 0; i < enemies.size();)         // [HW3] For one enemy in the vector starting at 0.                                                                   
             {
-                Enemy& enemy = enemies[i];                                  // [HW3]
-                bool collision = CheckCollisionCircles(enemy.position,      // [HW3]
-                    enemyRadius, bullet.position, bulletRadius);            // [HW3]
-                if (collision)
+                Enemy& enemy = enemies[i];                                  // [HW3] Creating enemies variable changes.
+                bool collision = CheckCollisionCircles(enemy.position,      // [HW3] Check for collision for bullets and enemies.
+                    enemyRadius, bullet.position, bulletRadius);            
+                if (collision)                                              // [HW3] If collision is true... 
                 {
-                    enemy.health--;                                         // [HW3]
-                    if (enemy.health <= 0)                                  // [HW3]
+                    enemy.health--;                                         // [HW3] Enemy health will drop by its own amount.
+                    if (enemy.health <= 0)                                  // [HW3] When health equals zero ...
                     {
-                        enemies.erase(enemies.begin() + i);                 // [HW3]
-                        bullet.enabled = false;                             // [HW3]
-                        break;                                              // [HW3]
-                    }
+                        enemies.erase(enemies.begin() + i);                 // [HW3] Deletes enemy, and decreases vector size.
+                        bullet.enabled = false;                             // [HW3] removes bullet.
+                        break;                                              // [HW3] Stops the loop here.
+                    }                               
                 }
                 else
                 {
-                    i++;    // [HW3] Add one to forloop. 
+                    i++;
                 }
             }
             bullet.enabled = !expired && bullet.enabled;
